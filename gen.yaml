@@ -2,13 +2,14 @@ configVersion: 1.0.0
 management:
   docChecksum: 8db86c8597b22945c2b3f77241037075
   docVersion: 1.0.0
-  speakeasyVersion: 1.78.8
-  generationVersion: 2.96.6
+  speakeasyVersion: 1.109.2
+  generationVersion: 2.173.0
 generation:
   comments:
     disableComments: false
     omitDescriptionIfSummaryPresent: false
   baseServerURL: ""
+  repoURL: https://github.com/speakeasy-sdks/bar-ts-2.git
   sdkClassName: The-Speakeasy-Bar
   singleTagPerOp: false
   tagNamespacingDisabled: false
@@ -23,6 +24,14 @@ features:
     globalServerURLs: 2.82.0
     inputOutputModels: 2.81.1
     serverIDs: 2.81.1
+  typescript:
+    core: 2.94.0
+    errors: 2.81.7
+    examples: 2.81.3
+    globalSecurity: 2.82.0
+    globalServerURLs: 2.82.0
+    inputOutputModels: 2.81.1
+    serverIDs: 2.81.2
 python:
   version: 1.26.0
   author: speakeasy-bar-2
@@ -31,8 +40,11 @@ python:
   maxMethodParams: 0
   packageName: The-Speakeasy-Bar
 typescript:
-  version: 0.0.1
+  version: 0.1.0
   author: speakeasy-bar-2
   clientServerStatusCodesAsErrors: true
+  flattenGlobalSecurity: true
+  installationURL: https://github.com/speakeasy-sdks/bar-ts-2
   maxMethodParams: 0
   packageName: The-Speakeasy-Bar
+  repoSubDirectory: .
