@@ -3,22 +3,22 @@
  */
 
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
-import * as shared from "../shared";
+import * as shared from "../../../sdk/models/shared";
 import { AxiosResponse } from "axios";
 import { Expose } from "class-transformer";
 
-export enum SubscribeToWebhooksRequestBodyWebhook {
+export enum Webhook {
     StockUpdate = "stockUpdate",
 }
 
-export class SubscribeToWebhooksRequestBody extends SpeakeasyBase {
+export class RequestBody extends SpeakeasyBase {
     @SpeakeasyMetadata()
     @Expose({ name: "url" })
     url?: string;
 
     @SpeakeasyMetadata()
     @Expose({ name: "webhook" })
-    webhook?: SubscribeToWebhooksRequestBodyWebhook;
+    webhook?: Webhook;
 }
 
 export class SubscribeToWebhooksResponse extends SpeakeasyBase {

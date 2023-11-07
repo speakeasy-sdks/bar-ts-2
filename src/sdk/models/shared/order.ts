@@ -35,7 +35,7 @@ export class OrderInput extends SpeakeasyBase {
 /**
  * The status of the order.
  */
-export enum OrderStatus {
+export enum Status {
     Pending = "pending",
     Processing = "processing",
     Complete = "complete",
@@ -64,7 +64,7 @@ export class Order extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     @Expose({ name: "status" })
-    status: OrderStatus;
+    status: Status;
 
     /**
      * The type of order.

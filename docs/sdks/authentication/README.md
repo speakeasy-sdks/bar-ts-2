@@ -1,5 +1,5 @@
 # Authentication
-(*authentication*)
+(*.authentication*)
 
 ## Overview
 

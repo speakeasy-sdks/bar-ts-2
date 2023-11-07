@@ -1,5 +1,5 @@
 # Drinks
-(*drinks*)
+(*.drinks*)
 
 ## Overview
 

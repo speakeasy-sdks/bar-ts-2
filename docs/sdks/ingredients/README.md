@@ -1,5 +1,5 @@
 # Ingredients
-(*ingredients*)
+(*.ingredients*)
 
 ## Overview
 

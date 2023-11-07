@@ -3,11 +3,11 @@
  */
 
 import * as utils from "../internal/utils";
+import * as shared from "../sdk/models/shared";
 import { Authentication } from "./authentication";
 import { Config } from "./config";
 import { Drinks } from "./drinks";
 import { Ingredients } from "./ingredients";
-import * as shared from "./models/shared";
 import { Orders } from "./orders";
 import axios from "axios";
 import { AxiosInstance } from "axios";
@@ -85,9 +85,9 @@ export class SDKConfiguration {
     serverDefaults: any;
     language = "typescript";
     openapiDocVersion = "1.0.0";
-    sdkVersion = "0.1.0";
-    genVersion = "2.173.0";
-    userAgent = "speakeasy-sdk/typescript 0.1.0 2.173.0 1.0.0 The-Speakeasy-Bar";
+    sdkVersion = "0.2.0";
+    genVersion = "2.181.1";
+    userAgent = "speakeasy-sdk/typescript 0.2.0 2.181.1 1.0.0 The-Speakeasy-Bar";
     retryConfig?: utils.RetryConfig;
     public constructor(init?: Partial<SDKConfiguration>) {
         Object.assign(this, init);
@@ -107,7 +107,6 @@ export class TheSpeakeasyBar {
      * The authentication endpoints.
      */
     public authentication: Authentication;
-    public config: Config;
     /**
      * The drinks endpoints.
      */
@@ -120,6 +119,7 @@ export class TheSpeakeasyBar {
      * The orders endpoints.
      */
     public orders: Orders;
+    public config: Config;
 
     private sdkConfiguration: SDKConfiguration;
 
@@ -154,9 +154,9 @@ export class TheSpeakeasyBar {
         });
 
         this.authentication = new Authentication(this.sdkConfiguration);
-        this.config = new Config(this.sdkConfiguration);
         this.drinks = new Drinks(this.sdkConfiguration);
         this.ingredients = new Ingredients(this.sdkConfiguration);
         this.orders = new Orders(this.sdkConfiguration);
+        this.config = new Config(this.sdkConfiguration);
     }
 }

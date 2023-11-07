@@ -3,7 +3,7 @@
  */
 
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
-import * as shared from "../shared";
+import * as shared from "../../../sdk/models/shared";
 import { AxiosResponse } from "axios";
 import { Expose } from "class-transformer";
 
@@ -20,7 +20,7 @@ export class AuthenticateRequestBody extends SpeakeasyBase {
 /**
  * The api key to use for authenticated endpoints.
  */
-export class Authenticate200ApplicationJSON extends SpeakeasyBase {
+export class AuthenticateResponseBody extends SpeakeasyBase {
     @SpeakeasyMetadata()
     @Expose({ name: "token" })
     token?: string;
@@ -55,5 +55,5 @@ export class AuthenticateResponse extends SpeakeasyBase {
      * The api key to use for authenticated endpoints.
      */
     @SpeakeasyMetadata()
-    authenticate200ApplicationJSONObject?: Authenticate200ApplicationJSON;
+    object?: AuthenticateResponseBody;
 }

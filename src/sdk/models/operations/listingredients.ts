@@ -3,7 +3,7 @@
  */
 
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
-import * as shared from "../shared";
+import * as shared from "../../../sdk/models/shared";
 import { AxiosResponse } from "axios";
 
 export class ListIngredientsRequest extends SpeakeasyBase {
@@ -28,12 +28,6 @@ export class ListIngredientsResponse extends SpeakeasyBase {
     error?: shared.ErrorT;
 
     /**
-     * A list of ingredients.
-     */
-    @SpeakeasyMetadata({ elemType: shared.Ingredient })
-    ingredients?: shared.Ingredient[];
-
-    /**
      * HTTP response status code for this operation
      */
     @SpeakeasyMetadata()
@@ -44,4 +38,10 @@ export class ListIngredientsResponse extends SpeakeasyBase {
      */
     @SpeakeasyMetadata()
     rawResponse?: AxiosResponse;
+
+    /**
+     * A list of ingredients.
+     */
+    @SpeakeasyMetadata({ elemType: shared.Ingredient })
+    classes?: shared.Ingredient[];
 }
