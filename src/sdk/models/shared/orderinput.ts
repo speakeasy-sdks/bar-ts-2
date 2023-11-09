@@ -7,18 +7,9 @@ import { OrderType } from "./ordertype";
 import { Expose } from "class-transformer";
 
 /**
- * The status of the order.
- */
-export enum Status {
-    Pending = "pending",
-    Processing = "processing",
-    Complete = "complete",
-}
-
-/**
  * An order for a drink or ingredient.
  */
-export class Order extends SpeakeasyBase {
+export class OrderInput extends SpeakeasyBase {
     /**
      * The product code of the drink or ingredient.
      */
@@ -32,13 +23,6 @@ export class Order extends SpeakeasyBase {
     @SpeakeasyMetadata()
     @Expose({ name: "quantity" })
     quantity: number;
-
-    /**
-     * The status of the order.
-     */
-    @SpeakeasyMetadata()
-    @Expose({ name: "status" })
-    status: Status;
 
     /**
      * The type of order.

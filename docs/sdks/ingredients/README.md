@@ -1,5 +1,5 @@
 # Ingredients
-(*.ingredients*)
+(*ingredients*)
 
 ## Overview
 
@@ -29,7 +29,6 @@ import { TheSpeakeasyBar } from "The-Speakeasy-Bar";
     ],
   });
 
-
   if (res.statusCode == 200) {
     // handle response
   }
@@ -38,13 +37,18 @@ import { TheSpeakeasyBar } from "The-Speakeasy-Bar";
 
 ### Parameters
 
-| Parameter                                                                              | Type                                                                                   | Required                                                                               | Description                                                                            |
-| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
-| `request`                                                                              | [operations.ListIngredientsRequest](../../models/operations/listingredientsrequest.md) | :heavy_check_mark:                                                                     | The request object to use for the request.                                             |
-| `config`                                                                               | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                           | :heavy_minus_sign:                                                                     | Available config options for making requests.                                          |
+| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `request`                                                                                  | [operations.ListIngredientsRequest](../../sdk/models/operations/listingredientsrequest.md) | :heavy_check_mark:                                                                         | The request object to use for the request.                                                 |
+| `config`                                                                                   | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                               | :heavy_minus_sign:                                                                         | Available config options for making requests.                                              |
 
 
 ### Response
 
-**Promise<[operations.ListIngredientsResponse](../../models/operations/listingredientsresponse.md)>**
+**Promise<[operations.ListIngredientsResponse](../../sdk/models/operations/listingredientsresponse.md)>**
+### Errors
 
+| Error Object     | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.APIError  | 5XX              | application/json |
+| errors.SDKError  | 400-600          | */*              |

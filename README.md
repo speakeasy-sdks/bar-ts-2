@@ -96,24 +96,24 @@ import { DrinkType } from "The-Speakeasy-Bar/dist/sdk/models/shared";
 ## Available Resources and Operations
 
 
-### [.authentication](docs/sdks/authentication/README.md)
+### [authentication](docs/sdks/authentication/README.md)
 
 * [authenticate](docs/sdks/authentication/README.md#authenticate) - Authenticate with the API by providing a username and password.
 
-### [.drinks](docs/sdks/drinks/README.md)
+### [drinks](docs/sdks/drinks/README.md)
 
 * [getDrink](docs/sdks/drinks/README.md#getdrink) - Get a drink.
 * [listDrinks](docs/sdks/drinks/README.md#listdrinks) - Get a list of drinks.
 
-### [.ingredients](docs/sdks/ingredients/README.md)
+### [ingredients](docs/sdks/ingredients/README.md)
 
 * [listIngredients](docs/sdks/ingredients/README.md#listingredients) - Get a list of ingredients.
 
-### [.orders](docs/sdks/orders/README.md)
+### [orders](docs/sdks/orders/README.md)
 
 * [createOrder](docs/sdks/orders/README.md#createorder) - Create an order.
 
-### [.config](docs/sdks/config/README.md)
+### [config](docs/sdks/config/README.md)
 
 * [subscribeToWebhooks](docs/sdks/config/README.md#subscribetowebhooks) - Subscribe to webhooks.
 <!-- End SDK Available Operations -->
@@ -129,7 +129,12 @@ import { DrinkType } from "The-Speakeasy-Bar/dist/sdk/models/shared";
 <!-- Start Error Handling -->
 # Error Handling
 
-Handling errors in your SDK should largely match your expectations.  All operations return a response object or throw an error.  If Error objects are specified in your OpenAPI Spec, the SDK will throw the appropriate Error type.
+Handling errors in this SDK should largely match your expectations.  All operations return a response object or throw an error.  If Error objects are specified in your OpenAPI Spec, the SDK will throw the appropriate Error type.
+
+| Error Object     | Status Code      | Content Type     |
+| ---------------- | ---------------- | ---------------- |
+| errors.APIError  | 5XX              | application/json |
+| errors.SDKError  | 400-600          | */*              |
 
 
 ## Example
@@ -147,11 +152,10 @@ import { TheSpeakeasyBar } from "The-Speakeasy-Bar";
   try {
     res = await sdk.authentication.authenticate({});
   } catch (e) { 
-    } else if (e instanceof APIError) {
+    if (e instanceof errors.APIError) {
       console.error(e) // handle exception 
     
   }
-
 
   if (res.statusCode == 200) {
     // handle response
@@ -251,12 +255,11 @@ const sdk = new TheSpeakeasyBar({defaultClient: httpClient});
 
 
 <!-- Start Authentication -->
-
 # Authentication
 
 ## Per-Client Security Schemes
 
-Your SDK supports the following security scheme globally:
+This SDK supports the following security scheme globally:
 
 | Name     | Type     | Scheme   |
 | -------- | -------- | -------- |

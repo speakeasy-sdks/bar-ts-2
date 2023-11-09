@@ -6,7 +6,7 @@ import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import { IngredientType } from "./ingredienttype";
 import { Expose } from "class-transformer";
 
-export class Ingredient extends SpeakeasyBase {
+export class IngredientInput extends SpeakeasyBase {
     /**
      * The name of the ingredient.
      */
@@ -20,13 +20,6 @@ export class Ingredient extends SpeakeasyBase {
     @SpeakeasyMetadata()
     @Expose({ name: "productCode" })
     productCode?: string;
-
-    /**
-     * The number of units of the ingredient in stock, only available when authenticated.
-     */
-    @SpeakeasyMetadata()
-    @Expose({ name: "stock" })
-    stock?: number;
 
     /**
      * The type of ingredient.
