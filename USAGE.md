@@ -1,6 +1,4 @@
 <!-- Start SDK Example Usage -->
-
-
 ```typescript
 import { TheSpeakeasyBar } from "The-Speakeasy-Bar";
 import { DrinkType } from "The-Speakeasy-Bar/dist/sdk/models/shared";
