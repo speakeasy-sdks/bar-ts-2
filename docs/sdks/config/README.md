@@ -17,7 +17,9 @@ import { Webhook } from "The-Speakeasy-Bar/dist/sdk/models/operations";
 
 (async() => {
   const sdk = new TheSpeakeasyBar({
-    apiKey: "",
+    security: {
+      apiKey: "<YOUR_API_KEY>",
+    },
   });
 
   const res = await sdk.config.subscribeToWebhooks([

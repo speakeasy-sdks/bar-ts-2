@@ -23,7 +23,7 @@ src/sdk/models/errors/sdkerror.ts
 src/sdk/types/index.ts
 src/sdk/types/rfcdate.ts
 tsconfig.json
-src/sdk/models/operations/authenticate.ts
+src/sdk/models/operations/login.ts
 src/sdk/models/operations/getdrink.ts
 src/sdk/models/operations/listdrinks.ts
 src/sdk/models/operations/listingredients.ts
@@ -49,9 +49,11 @@ src/sdk/models/shared/index.ts
 src/sdk/models/callbacks/index.ts
 src/sdk/models/webhooks/index.ts
 USAGE.md
-docs/sdk/models/operations/authenticaterequestbody.md
-docs/sdk/models/operations/authenticateresponsebody.md
-docs/sdk/models/operations/authenticateresponse.md
+docs/sdk/models/operations/loginsecurity.md
+docs/sdk/models/operations/typet.md
+docs/sdk/models/operations/loginrequestbody.md
+docs/sdk/models/operations/loginresponsebody.md
+docs/sdk/models/operations/loginresponse.md
 docs/sdk/models/operations/getdrinkrequest.md
 docs/sdk/models/operations/getdrinkresponse.md
 docs/sdk/models/operations/listdrinksrequest.md

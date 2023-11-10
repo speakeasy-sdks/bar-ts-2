@@ -20,7 +20,9 @@ import { TheSpeakeasyBar } from "The-Speakeasy-Bar";
 
 (async() => {
   const sdk = new TheSpeakeasyBar({
-    apiKey: "",
+    security: {
+      apiKey: "<YOUR_API_KEY>",
+    },
   });
 
   const res = await sdk.ingredients.listIngredients({

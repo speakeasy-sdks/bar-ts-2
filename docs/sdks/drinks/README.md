@@ -21,7 +21,9 @@ import { TheSpeakeasyBar } from "The-Speakeasy-Bar";
 
 (async() => {
   const sdk = new TheSpeakeasyBar({
-    apiKey: "",
+    security: {
+      apiKey: "<YOUR_API_KEY>",
+    },
   });
 
   const res = await sdk.drinks.getDrink({
@@ -64,7 +66,9 @@ import { DrinkType } from "The-Speakeasy-Bar/dist/sdk/models/shared";
 
 (async() => {
   const sdk = new TheSpeakeasyBar({
-    apiKey: "",
+    security: {
+      apiKey: "<YOUR_API_KEY>",
+    },
   });
 
   const res = await sdk.drinks.listDrinks({});
@@ -80,6 +84,7 @@ import { DrinkType } from "The-Speakeasy-Bar/dist/sdk/models/shared";
 | Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
 | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
 | `request`                                                                        | [operations.ListDrinksRequest](../../sdk/models/operations/listdrinksrequest.md) | :heavy_check_mark:                                                               | The request object to use for the request.                                       |
+| `serverURL`                                                                      | *string*                                                                         | :heavy_minus_sign:                                                               | An optional server URL to use.                                                   |
 | `config`                                                                         | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                     | :heavy_minus_sign:                                                               | Available config options for making requests.                                    |
 
 

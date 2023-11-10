@@ -23,12 +23,13 @@ export class Authentication {
     /**
      * Authenticate with the API by providing a username and password.
      */
-    async authenticate(
-        req: operations.AuthenticateRequestBody,
+    async login(
+        req: operations.LoginRequestBody,
+        security: operations.LoginSecurity,
         config?: AxiosRequestConfig
-    ): Promise<operations.AuthenticateResponse> {
+    ): Promise<operations.LoginResponse> {
         if (!(req instanceof utils.SpeakeasyBase)) {
-            req = new operations.AuthenticateRequestBody(req);
+            req = new operations.LoginRequestBody(req);
         }
 
         const baseURL: string = utils.templateUrl(
@@ -47,14 +48,10 @@ export class Authentication {
             }
         }
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
-        let globalSecurity = this.sdkConfiguration.security;
-        if (typeof globalSecurity === "function") {
-            globalSecurity = await globalSecurity();
+        if (!(security instanceof utils.SpeakeasyBase)) {
+            security = new operations.LoginSecurity(security);
         }
-        if (!(globalSecurity instanceof utils.SpeakeasyBase)) {
-            globalSecurity = new shared.Security(globalSecurity);
-        }
-        const properties = utils.parseSecurityProperties(globalSecurity);
+        const properties = utils.parseSecurityProperties(security);
         const headers: RawAxiosRequestHeaders = {
             ...reqBodyHeaders,
             ...config?.headers,
@@ -81,7 +78,7 @@ export class Authentication {
             throw new Error(`status code not found in response: ${httpRes}`);
         }
 
-        const res: operations.AuthenticateResponse = new operations.AuthenticateResponse({
+        const res: operations.LoginResponse = new operations.LoginResponse({
             statusCode: httpRes.status,
             contentType: responseContentType,
             rawResponse: httpRes,
@@ -92,7 +89,7 @@ export class Authentication {
                 if (utils.matchContentType(responseContentType, `application/json`)) {
                     res.object = utils.objectToClass(
                         JSON.parse(decodedRes),
-                        operations.AuthenticateResponseBody
+                        operations.LoginResponseBody
                     );
                 } else {
                     throw new errors.SDKError(

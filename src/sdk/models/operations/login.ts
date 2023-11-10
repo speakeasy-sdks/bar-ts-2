@@ -7,26 +7,35 @@ import * as shared from "../../../sdk/models/shared";
 import { AxiosResponse } from "axios";
 import { Expose } from "class-transformer";
 
-export class AuthenticateRequestBody extends SpeakeasyBase {
-    @SpeakeasyMetadata()
-    @Expose({ name: "password" })
-    password?: string;
+export class LoginSecurity extends SpeakeasyBase {
+    @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic;name=password" })
+    password: string;
 
+    @SpeakeasyMetadata({ data: "security, scheme=true;type=http;subtype=basic;name=username" })
+    username: string;
+}
+
+export enum TypeT {
+    ApiKey = "apiKey",
+    Jwt = "JWT",
+}
+
+export class LoginRequestBody extends SpeakeasyBase {
     @SpeakeasyMetadata()
-    @Expose({ name: "username" })
-    username?: string;
+    @Expose({ name: "type" })
+    type: TypeT;
 }
 
 /**
  * The api key to use for authenticated endpoints.
  */
-export class AuthenticateResponseBody extends SpeakeasyBase {
+export class LoginResponseBody extends SpeakeasyBase {
     @SpeakeasyMetadata()
     @Expose({ name: "token" })
     token?: string;
 }
 
-export class AuthenticateResponse extends SpeakeasyBase {
+export class LoginResponse extends SpeakeasyBase {
     /**
      * HTTP response content type for this operation
      */
@@ -55,5 +64,5 @@ export class AuthenticateResponse extends SpeakeasyBase {
      * The api key to use for authenticated endpoints.
      */
     @SpeakeasyMetadata()
-    object?: AuthenticateResponseBody;
+    object?: LoginResponseBody;
 }

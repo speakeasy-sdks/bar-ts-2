@@ -46,7 +46,10 @@ export enum ServerEnvironment {
  * The available configuration options for the SDK
  */
 export type SDKProps = {
-    apiKey?: string;
+    /**
+     * The security details required to authenticate the SDK
+     */
+    security?: shared.Security | (() => Promise<shared.Security>);
 
     /**
      * Allows overriding the default axios client used by the SDK
@@ -85,9 +88,9 @@ export class SDKConfiguration {
     serverDefaults: any;
     language = "typescript";
     openapiDocVersion = "1.0.0";
-    sdkVersion = "0.3.1";
+    sdkVersion = "0.3.2";
     genVersion = "2.187.7";
-    userAgent = "speakeasy-sdk/typescript 0.3.1 2.187.7 1.0.0 The-Speakeasy-Bar";
+    userAgent = "speakeasy-sdk/typescript 0.3.2 2.187.7 1.0.0 The-Speakeasy-Bar";
     retryConfig?: utils.RetryConfig;
     public constructor(init?: Partial<SDKConfiguration>) {
         Object.assign(this, init);
@@ -146,8 +149,7 @@ export class TheSpeakeasyBar {
         const defaultClient = props?.defaultClient ?? axios.create();
         this.sdkConfiguration = new SDKConfiguration({
             defaultClient: defaultClient,
-            security: new shared.Security({ apiKey: props?.apiKey }),
-
+            security: props?.security,
             serverURL: serverURL,
             serverDefaults: defaults,
             retryConfig: props?.retryConfig,

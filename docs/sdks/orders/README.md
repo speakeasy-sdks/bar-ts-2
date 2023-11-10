@@ -21,7 +21,9 @@ import { OrderType } from "The-Speakeasy-Bar/dist/sdk/models/shared";
 
 (async() => {
   const sdk = new TheSpeakeasyBar({
-    apiKey: "",
+    security: {
+      apiKey: "<YOUR_API_KEY>",
+    },
   });
 
   const res = await sdk.orders.createOrder({

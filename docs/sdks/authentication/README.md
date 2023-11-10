@@ -7,9 +7,9 @@ The authentication endpoints.
 
 ### Available Operations
 
-* [authenticate](#authenticate) - Authenticate with the API by providing a username and password.
+* [login](#login) - Authenticate with the API by providing a username and password.
 
-## authenticate
+## login
 
 Authenticate with the API by providing a username and password.
 
@@ -17,13 +17,18 @@ Authenticate with the API by providing a username and password.
 
 ```typescript
 import { TheSpeakeasyBar } from "The-Speakeasy-Bar";
+import { LoginSecurity, TypeT } from "The-Speakeasy-Bar/dist/sdk/models/operations";
 
 (async() => {
-  const sdk = new TheSpeakeasyBar({
-    apiKey: "",
-  });
+  const sdk = new TheSpeakeasyBar();
+const operationSecurity: LoginSecurity = {
+  password: "<PASSWORD>",
+  username: "<USERNAME>",
+};
 
-  const res = await sdk.authentication.authenticate({});
+  const res = await sdk.authentication.login({
+    type: TypeT.ApiKey,
+  }, operationSecurity);
 
   if (res.statusCode == 200) {
     // handle response
@@ -33,15 +38,16 @@ import { TheSpeakeasyBar } from "The-Speakeasy-Bar";
 
 ### Parameters
 
-| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
-| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| `request`                                                                                    | [operations.AuthenticateRequestBody](../../sdk/models/operations/authenticaterequestbody.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
-| `config`                                                                                     | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                                 | :heavy_minus_sign:                                                                           | Available config options for making requests.                                                |
+| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `request`                                                                      | [operations.LoginRequestBody](../../sdk/models/operations/loginrequestbody.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
+| `security`                                                                     | [operations.LoginSecurity](../../sdk/models/operations/loginsecurity.md)       | :heavy_check_mark:                                                             | The security requirements to use for the request.                              |
+| `config`                                                                       | [AxiosRequestConfig](https://axios-http.com/docs/req_config)                   | :heavy_minus_sign:                                                             | Available config options for making requests.                                  |
 
 
 ### Response
 
-**Promise<[operations.AuthenticateResponse](../../sdk/models/operations/authenticateresponse.md)>**
+**Promise<[operations.LoginResponse](../../sdk/models/operations/loginresponse.md)>**
 ### Errors
 
 | Error Object     | Status Code      | Content Type     |

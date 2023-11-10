@@ -133,16 +133,17 @@ export class Drinks {
      */
     async listDrinks(
         req: operations.ListDrinksRequest,
+        serverURL?: string,
         config?: AxiosRequestConfig
     ): Promise<operations.ListDrinksResponse> {
         if (!(req instanceof utils.SpeakeasyBase)) {
             req = new operations.ListDrinksRequest(req);
         }
 
-        const baseURL: string = utils.templateUrl(
-            this.sdkConfiguration.serverURL,
-            this.sdkConfiguration.serverDefaults
-        );
+        let baseURL: string = utils.templateUrl(operations.ListDrinksServerList[0], {});
+        if (serverURL) {
+            baseURL = serverURL;
+        }
         const operationUrl: string = baseURL.replace(/\/$/, "") + "/drinks";
         const client: AxiosInstance = this.sdkConfiguration.defaultClient;
         let globalSecurity = this.sdkConfiguration.security;

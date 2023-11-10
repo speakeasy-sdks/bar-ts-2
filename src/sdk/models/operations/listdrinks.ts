@@ -5,6 +5,10 @@
 import { SpeakeasyBase, SpeakeasyMetadata } from "../../../internal/utils";
 import * as shared from "../../../sdk/models/shared";
 import { AxiosResponse } from "axios";
+export const ListDrinksServerList = [
+    "https://speakeasy.bar",
+    "https://test.speakeasy.bar",
+] as const;
 
 export class ListDrinksRequest extends SpeakeasyBase {
     /**
