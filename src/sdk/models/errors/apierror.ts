@@ -5,6 +5,9 @@
 import { SpeakeasyMetadata } from "../../../internal/utils";
 import { classToPlain, Expose } from "class-transformer";
 
+/**
+ * An error occurred interacting with the API.
+ */
 export class APIError extends Error {
     @SpeakeasyMetadata()
     @Expose({ name: "code" })
