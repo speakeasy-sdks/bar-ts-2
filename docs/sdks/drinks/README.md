@@ -19,7 +19,7 @@ Get a drink by name, if authenticated this will include stock levels and product
 ```typescript
 import { TheSpeakeasyBar } from "The-Speakeasy-Bar";
 
-(async() => {
+async function run() {
   const sdk = new TheSpeakeasyBar({
     security: {
       apiKey: "<YOUR_API_KEY>",
@@ -33,7 +33,9 @@ import { TheSpeakeasyBar } from "The-Speakeasy-Bar";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
@@ -64,7 +66,7 @@ Get a list of drinks, if authenticated this will include stock levels and produc
 import { TheSpeakeasyBar } from "The-Speakeasy-Bar";
 import { DrinkType } from "The-Speakeasy-Bar/dist/sdk/models/shared";
 
-(async() => {
+async function run() {
   const sdk = new TheSpeakeasyBar({
     security: {
       apiKey: "<YOUR_API_KEY>",
@@ -76,7 +78,9 @@ import { DrinkType } from "The-Speakeasy-Bar/dist/sdk/models/shared";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters

@@ -15,7 +15,7 @@ Subscribe to webhooks.
 import { TheSpeakeasyBar } from "The-Speakeasy-Bar";
 import { Webhook } from "The-Speakeasy-Bar/dist/sdk/models/operations";
 
-(async() => {
+async function run() {
   const sdk = new TheSpeakeasyBar({
     security: {
       apiKey: "<YOUR_API_KEY>",
@@ -29,15 +29,18 @@ import { Webhook } from "The-Speakeasy-Bar/dist/sdk/models/operations";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters
 
-| Parameter                                                    | Type                                                         | Required                                                     | Description                                                  |
-| ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
-| `request`                                                    | [operations.RequestBody[]](../../models/.md)                 | :heavy_check_mark:                                           | The request object to use for the request.                   |
-| `config`                                                     | [AxiosRequestConfig](https://axios-http.com/docs/req_config) | :heavy_minus_sign:                                           | Available config options for making requests.                |
+| Parameter                                                           | Type                                                                | Required                                                            | Description                                                         |
+| ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| `request`                                                           | [operations.RequestBody[]](../../models/.md)                        | :heavy_check_mark:                                                  | The request object to use for the request.                          |
+| `retries`                                                           | [utils.RetryConfig](../../internal/utils/retryconfig.md)            | :heavy_minus_sign:                                                  | Configuration to override the default retry behavior of the client. |
+| `config`                                                            | [AxiosRequestConfig](https://axios-http.com/docs/req_config)        | :heavy_minus_sign:                                                  | Available config options for making requests.                       |
 
 
 ### Response
@@ -45,7 +48,8 @@ import { Webhook } from "The-Speakeasy-Bar/dist/sdk/models/operations";
 **Promise<[operations.SubscribeToWebhooksResponse](../../sdk/models/operations/subscribetowebhooksresponse.md)>**
 ### Errors
 
-| Error Object     | Status Code      | Content Type     |
-| ---------------- | ---------------- | ---------------- |
-| errors.APIError  | 5XX              | application/json |
-| errors.SDKError  | 400-600          | */*              |
+| Error Object      | Status Code       | Content Type      |
+| ----------------- | ----------------- | ----------------- |
+| errors.BadRequest | 400               | application/json  |
+| errors.APIError   | 5XX               | application/json  |
+| errors.SDKError   | 400-600           | */*               |

@@ -19,7 +19,7 @@ Authenticate with the API by providing a username and password.
 import { TheSpeakeasyBar } from "The-Speakeasy-Bar";
 import { LoginSecurity, TypeT } from "The-Speakeasy-Bar/dist/sdk/models/operations";
 
-(async() => {
+async function run() {
   const sdk = new TheSpeakeasyBar();
 const operationSecurity: LoginSecurity = {
   password: "<PASSWORD>",
@@ -33,7 +33,9 @@ const operationSecurity: LoginSecurity = {
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters

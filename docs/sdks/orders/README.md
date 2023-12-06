@@ -19,7 +19,7 @@ Create an order for a drink.
 import { TheSpeakeasyBar } from "The-Speakeasy-Bar";
 import { OrderType } from "The-Speakeasy-Bar/dist/sdk/models/shared";
 
-(async() => {
+async function run() {
   const sdk = new TheSpeakeasyBar({
     security: {
       apiKey: "<YOUR_API_KEY>",
@@ -39,7 +39,9 @@ import { OrderType } from "The-Speakeasy-Bar/dist/sdk/models/shared";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters

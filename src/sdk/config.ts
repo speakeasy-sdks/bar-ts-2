@@ -24,6 +24,7 @@ export class Config {
      */
     async subscribeToWebhooks(
         req: operations.RequestBody[],
+        retries?: utils.RetryConfig,
         config?: AxiosRequestConfig
     ): Promise<operations.SubscribeToWebhooksResponse> {
         const baseURL: string = utils.templateUrl(
@@ -60,15 +61,30 @@ export class Config {
 
         headers["user-agent"] = this.sdkConfiguration.userAgent;
 
-        const httpRes: AxiosResponse = await client.request({
-            validateStatus: () => true,
-            url: operationUrl,
-            method: "post",
-            headers: headers,
-            responseType: "arraybuffer",
-            data: reqBody,
-            ...config,
-        });
+        const globalRetryConfig = this.sdkConfiguration.retryConfig;
+        let retryConfig: utils.RetryConfig | undefined = retries;
+        if (!retryConfig) {
+            if (globalRetryConfig) {
+                retryConfig = globalRetryConfig;
+            } else {
+                retryConfig = new utils.RetryConfig(
+                    "backoff",
+                    new utils.BackoffStrategy(10, 200, 1.5, 1000),
+                    false
+                );
+            }
+        }
+        const httpRes: AxiosResponse = await utils.Retry(() => {
+            return client.request({
+                validateStatus: () => true,
+                url: operationUrl,
+                method: "post",
+                headers: headers,
+                responseType: "arraybuffer",
+                data: reqBody,
+                ...config,
+            });
+        }, new utils.Retries(retryConfig, ["404"]));
 
         const responseContentType: string = httpRes?.headers?.["content-type"] ?? "";
 
@@ -85,6 +101,20 @@ export class Config {
         const decodedRes = new TextDecoder().decode(httpRes?.data);
         switch (true) {
             case httpRes?.status == 200:
+                break;
+            case httpRes?.status == 400:
+                if (utils.matchContentType(responseContentType, `application/json`)) {
+                    const err = utils.objectToClass(JSON.parse(decodedRes), errors.BadRequest);
+                    err.rawResponse = httpRes;
+                    throw new errors.BadRequest(err);
+                } else {
+                    throw new errors.SDKError(
+                        "unknown content-type received: " + responseContentType,
+                        httpRes.status,
+                        decodedRes,
+                        httpRes
+                    );
+                }
                 break;
             case httpRes?.status >= 400 && httpRes?.status < 500:
                 throw new errors.SDKError(

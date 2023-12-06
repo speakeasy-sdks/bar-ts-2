@@ -3,7 +3,7 @@
  */
 
 import { SpeakeasyMetadata } from "../../../internal/utils";
-import { classToPlain, Expose } from "class-transformer";
+import { Expose } from "class-transformer";
 
 /**
  * An error occurred interacting with the API.
@@ -25,9 +25,6 @@ export class APIError extends Error {
         super();
         if (err) {
             Object.assign(this, err);
-            this.message = JSON.stringify(
-                classToPlain(err, { exposeUnsetFields: false, excludeExtraneousValues: true })
-            );
         }
 
         this.name = "APIError";

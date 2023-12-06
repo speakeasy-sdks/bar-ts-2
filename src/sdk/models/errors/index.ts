@@ -3,4 +3,5 @@
  */
 
 export * from "./apierror";
+export * from "./badrequest";
 export * from "./sdkerror";

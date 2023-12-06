@@ -1,4 +1,4 @@
-<!-- Start SDK Example Usage -->
+<!-- Start SDK Example Usage [usage] -->
 ### Sign in
 
 First you need to send an authentication request to the API by providing your username and password.
@@ -9,7 +9,7 @@ If your credentials are valid, you will receive a token in the response object: 
 import { TheSpeakeasyBar } from "The-Speakeasy-Bar";
 import { LoginSecurity, TypeT } from "The-Speakeasy-Bar/dist/sdk/models/operations";
 
-(async () => {
+async function run() {
     const sdk = new TheSpeakeasyBar();
     const operationSecurity: LoginSecurity = {
         password: "<PASSWORD>",
@@ -26,7 +26,9 @@ import { LoginSecurity, TypeT } from "The-Speakeasy-Bar/dist/sdk/models/operatio
     if (res.statusCode == 200) {
         // handle response
     }
-})();
+}
+
+run();
 
 ```
 
@@ -39,7 +41,7 @@ For example, you can filter the list of available drinks by type.
 import { TheSpeakeasyBar } from "The-Speakeasy-Bar";
 import { DrinkType } from "The-Speakeasy-Bar/dist/sdk/models/shared";
 
-(async () => {
+async function run() {
     const sdk = new TheSpeakeasyBar({
         security: {
             apiKey: "<YOUR_API_KEY>",
@@ -51,7 +53,9 @@ import { DrinkType } from "The-Speakeasy-Bar/dist/sdk/models/shared";
     if (res.statusCode == 200) {
         // handle response
     }
-})();
+}
+
+run();
 
 ```
 
@@ -64,7 +68,7 @@ This URL will get called whenever the supplier updates the status of your order.
 import { TheSpeakeasyBar } from "The-Speakeasy-Bar";
 import { OrderType } from "The-Speakeasy-Bar/dist/sdk/models/shared";
 
-(async () => {
+async function run() {
     const sdk = new TheSpeakeasyBar({
         security: {
             apiKey: "<YOUR_API_KEY>",
@@ -84,7 +88,33 @@ import { OrderType } from "The-Speakeasy-Bar/dist/sdk/models/shared";
     if (res.statusCode == 200) {
         // handle response
     }
-})();
+}
+
+run();
 
 ```
-<!-- End SDK Example Usage -->
+
+### Subscribe to webhooks to receive stock updates
+
+```typescript
+import { TheSpeakeasyBar } from "The-Speakeasy-Bar";
+import { Webhook } from "The-Speakeasy-Bar/dist/sdk/models/operations";
+
+async function run() {
+    const sdk = new TheSpeakeasyBar({
+        security: {
+            apiKey: "<YOUR_API_KEY>",
+        },
+    });
+
+    const res = await sdk.config.subscribeToWebhooks([{}]);
+
+    if (res.statusCode == 200) {
+        // handle response
+    }
+}
+
+run();
+
+```
+<!-- End SDK Example Usage [usage] -->

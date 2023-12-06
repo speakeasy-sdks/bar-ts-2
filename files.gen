@@ -41,6 +41,7 @@ src/sdk/models/shared/security.ts
 src/sdk/models/shared/ingredientinput.ts
 src/sdk/models/shared/drinkinput.ts
 src/sdk/models/errors/apierror.ts
+src/sdk/models/errors/badrequest.ts
 src/sdk/models/callbacks/createorder.ts
 src/sdk/models/webhooks/stockupdate.ts
 src/sdk/models/errors/index.ts
@@ -48,7 +49,6 @@ src/sdk/models/operations/index.ts
 src/sdk/models/shared/index.ts
 src/sdk/models/callbacks/index.ts
 src/sdk/models/webhooks/index.ts
-USAGE.md
 docs/sdk/models/operations/loginsecurity.md
 docs/sdk/models/operations/typet.md
 docs/sdk/models/operations/loginrequestbody.md
@@ -78,6 +78,7 @@ docs/sdk/models/shared/security.md
 docs/sdk/models/shared/ingredientinput.md
 docs/sdk/models/shared/drinkinput.md
 docs/sdk/models/errors/apierror.md
+docs/sdk/models/errors/badrequest.md
 docs/sdk/models/callbacks/createorderorderupdateresponse.md
 docs/sdk/models/callbacks/createorderorderupdaterequestbody.md
 docs/sdk/models/webhooks/stockupdateresponse.md
@@ -87,5 +88,7 @@ docs/sdks/authentication/README.md
 docs/sdks/drinks/README.md
 docs/sdks/ingredients/README.md
 docs/sdks/orders/README.md
+docs/internal/utils/retryconfig.md
 docs/sdks/config/README.md
+USAGE.md
 .gitattributes

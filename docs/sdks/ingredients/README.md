@@ -18,7 +18,7 @@ Get a list of ingredients, if authenticated this will include stock levels and p
 ```typescript
 import { TheSpeakeasyBar } from "The-Speakeasy-Bar";
 
-(async() => {
+async function run() {
   const sdk = new TheSpeakeasyBar({
     security: {
       apiKey: "<YOUR_API_KEY>",
@@ -34,7 +34,9 @@ import { TheSpeakeasyBar } from "The-Speakeasy-Bar";
   if (res.statusCode == 200) {
     // handle response
   }
-})();
+}
+
+run();
 ```
 
 ### Parameters

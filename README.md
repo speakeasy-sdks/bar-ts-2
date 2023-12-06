@@ -55,7 +55,7 @@ servers:
 
 Once you're finished iterating and happy with the output push only the latest version of spec into the repo and regenerate the SDK using step 6 above.
 
-<!-- Start SDK Installation -->
+<!-- Start SDK Installation [installation] -->
 ## SDK Installation
 
 ### NPM
@@ -69,10 +69,11 @@ npm add https://github.com/speakeasy-sdks/bar-ts-2
 ```bash
 yarn add https://github.com/speakeasy-sdks/bar-ts-2
 ```
-<!-- End SDK Installation -->
+<!-- End SDK Installation [installation] -->
 
+<!-- Start SDK Example Usage [usage] -->
 ## SDK Example Usage
-<!-- Start SDK Example Usage -->
+
 ### Sign in
 
 First you need to send an authentication request to the API by providing your username and password.
@@ -83,7 +84,7 @@ If your credentials are valid, you will receive a token in the response object: 
 import { TheSpeakeasyBar } from "The-Speakeasy-Bar";
 import { LoginSecurity, TypeT } from "The-Speakeasy-Bar/dist/sdk/models/operations";
 
-(async () => {
+async function run() {
     const sdk = new TheSpeakeasyBar();
     const operationSecurity: LoginSecurity = {
         password: "<PASSWORD>",
@@ -100,7 +101,9 @@ import { LoginSecurity, TypeT } from "The-Speakeasy-Bar/dist/sdk/models/operatio
     if (res.statusCode == 200) {
         // handle response
     }
-})();
+}
+
+run();
 
 ```
 
@@ -113,7 +116,7 @@ For example, you can filter the list of available drinks by type.
 import { TheSpeakeasyBar } from "The-Speakeasy-Bar";
 import { DrinkType } from "The-Speakeasy-Bar/dist/sdk/models/shared";
 
-(async () => {
+async function run() {
     const sdk = new TheSpeakeasyBar({
         security: {
             apiKey: "<YOUR_API_KEY>",
@@ -125,7 +128,9 @@ import { DrinkType } from "The-Speakeasy-Bar/dist/sdk/models/shared";
     if (res.statusCode == 200) {
         // handle response
     }
-})();
+}
+
+run();
 
 ```
 
@@ -138,7 +143,7 @@ This URL will get called whenever the supplier updates the status of your order.
 import { TheSpeakeasyBar } from "The-Speakeasy-Bar";
 import { OrderType } from "The-Speakeasy-Bar/dist/sdk/models/shared";
 
-(async () => {
+async function run() {
     const sdk = new TheSpeakeasyBar({
         security: {
             apiKey: "<YOUR_API_KEY>",
@@ -158,14 +163,39 @@ import { OrderType } from "The-Speakeasy-Bar/dist/sdk/models/shared";
     if (res.statusCode == 200) {
         // handle response
     }
-})();
+}
+
+run();
 
 ```
-<!-- End SDK Example Usage -->
 
-<!-- Start SDK Available Operations -->
+### Subscribe to webhooks to receive stock updates
+
+```typescript
+import { TheSpeakeasyBar } from "The-Speakeasy-Bar";
+import { Webhook } from "The-Speakeasy-Bar/dist/sdk/models/operations";
+
+async function run() {
+    const sdk = new TheSpeakeasyBar({
+        security: {
+            apiKey: "<YOUR_API_KEY>",
+        },
+    });
+
+    const res = await sdk.config.subscribeToWebhooks([{}]);
+
+    if (res.statusCode == 200) {
+        // handle response
+    }
+}
+
+run();
+
+```
+<!-- End SDK Example Usage [usage] -->
+
+<!-- Start Available Resources and Operations [operations] -->
 ## Available Resources and Operations
-
 
 ### [authentication](docs/sdks/authentication/README.md)
 
@@ -187,25 +217,22 @@ import { OrderType } from "The-Speakeasy-Bar/dist/sdk/models/shared";
 ### [config](docs/sdks/config/README.md)
 
 * [subscribeToWebhooks](docs/sdks/config/README.md#subscribetowebhooks) - Subscribe to webhooks.
-<!-- End SDK Available Operations -->
+<!-- End Available Resources and Operations [operations] -->
 
 
 
-<!-- Start Dev Containers -->
-
-<!-- End Dev Containers -->
 
 
-
-<!-- Start Error Handling -->
+<!-- Start Error Handling [errors] -->
 ## Error Handling
 
 Handling errors in this SDK should largely match your expectations.  All operations return a response object or throw an error.  If Error objects are specified in your OpenAPI Spec, the SDK will throw the appropriate Error type.
 
-| Error Object     | Status Code      | Content Type     |
-| ---------------- | ---------------- | ---------------- |
-| errors.APIError  | 5XX              | application/json |
-| errors.SDKError  | 400-600          | */*              |
+| Error Object      | Status Code       | Content Type      |
+| ----------------- | ----------------- | ----------------- |
+| errors.BadRequest | 400               | application/json  |
+| errors.APIError   | 5XX               | application/json  |
+| errors.SDKError   | 400-600           | */*               |
 
 Example
 
@@ -213,35 +240,42 @@ Example
 import { TheSpeakeasyBar } from "The-Speakeasy-Bar";
 import { Webhook } from "The-Speakeasy-Bar/dist/sdk/models/operations";
 
-(async() => {
-  const sdk = new TheSpeakeasyBar({
-    security: {
-      apiKey: "<YOUR_API_KEY>",
-    },
-  });
+async function run() {
+    const sdk = new TheSpeakeasyBar({
+        security: {
+            apiKey: "<YOUR_API_KEY>",
+        },
+    });
 
-  
-  let res;
-  try {
-    res = await sdk.config.subscribeToWebhooks([
-    {},
-  ]);
-  } catch (e) { 
-    if (e instanceof errors.APIError) {
-      console.error(e) // handle exception 
-    
-  }
+    let res;
+    try {
+        res = await sdk.config.subscribeToWebhooks([{}]);
+    } catch (err) {
+        if (err instanceof errors.BadRequest) {
+            console.error(err); // handle exception
+            throw err;
+        } else if (err instanceof errors.APIError) {
+            console.error(err); // handle exception
+            throw err;
+        } else if (err instanceof errors.SDKError) {
+            console.error(err); // handle exception
+            throw err;
+        }
+    }
 
-  if (res.statusCode == 200) {
-    // handle response
-  }
-})();
+    if (res.statusCode == 200) {
+        // handle response
+    }
+}
+
+run();
+
 ```
-<!-- End Error Handling -->
+<!-- End Error Handling [errors] -->
 
 
 
-<!-- Start Server Selection -->
+<!-- Start Server Selection [server] -->
 ## Server Selection
 
 ### Select Server by Name
@@ -253,32 +287,30 @@ You can override the default server globally by passing a server name to the `se
 | `prod` | `https://speakeasy.bar` | None |
 | `staging` | `https://staging.speakeasy.bar` | None |
 | `customer` | `https://{organization}.{environment}.speakeasy.bar` | `environment` (default is `prod`), `organization` (default is `api`) |
+
 #### Example
 
 ```typescript
 import { TheSpeakeasyBar } from "The-Speakeasy-Bar";
-import { LoginSecurity, TypeT } from "The-Speakeasy-Bar/dist/sdk/models/operations";
 
-(async () => {
+async function run() {
     const sdk = new TheSpeakeasyBar({
         server: "customer",
-    });
-    const operationSecurity: LoginSecurity = {
-        password: "<PASSWORD>",
-        username: "<USERNAME>",
-    };
-
-    const res = await sdk.authentication.login(
-        {
-            type: TypeT.ApiKey,
+        security: {
+            apiKey: "<YOUR_API_KEY>",
         },
-        operationSecurity
-    );
+    });
+
+    const res = await sdk.ingredients.listIngredients({
+        ingredients: ["string"],
+    });
 
     if (res.statusCode == 200) {
         // handle response
     }
-})();
+}
+
+run();
 
 ```
 
@@ -293,28 +325,25 @@ Some of the server options above contain variables. If you want to set the value
 The default server can also be overridden globally by passing a URL to the `serverURL: str` optional parameter when initializing the SDK client instance. For example:
 ```typescript
 import { TheSpeakeasyBar } from "The-Speakeasy-Bar";
-import { LoginSecurity, TypeT } from "The-Speakeasy-Bar/dist/sdk/models/operations";
 
-(async () => {
+async function run() {
     const sdk = new TheSpeakeasyBar({
         serverURL: "https://speakeasy.bar",
-    });
-    const operationSecurity: LoginSecurity = {
-        password: "<PASSWORD>",
-        username: "<USERNAME>",
-    };
-
-    const res = await sdk.authentication.login(
-        {
-            type: TypeT.ApiKey,
+        security: {
+            apiKey: "<YOUR_API_KEY>",
         },
-        operationSecurity
-    );
+    });
+
+    const res = await sdk.ingredients.listIngredients({
+        ingredients: ["string"],
+    });
 
     if (res.statusCode == 200) {
         // handle response
     }
-})();
+}
+
+run();
 
 ```
 
@@ -325,7 +354,7 @@ The server URL can also be overridden on a per-operation basis, provided a serve
 import { TheSpeakeasyBar } from "The-Speakeasy-Bar";
 import { DrinkType } from "The-Speakeasy-Bar/dist/sdk/models/shared";
 
-(async () => {
+async function run() {
     const sdk = new TheSpeakeasyBar({
         security: {
             apiKey: "<YOUR_API_KEY>",
@@ -337,23 +366,25 @@ import { DrinkType } from "The-Speakeasy-Bar/dist/sdk/models/shared";
     if (res.statusCode == 200) {
         // handle response
     }
-})();
+}
+
+run();
 
 ```
-<!-- End Server Selection -->
+<!-- End Server Selection [server] -->
 
 
 
-<!-- Start Custom HTTP Client -->
+<!-- Start Custom HTTP Client [http-client] -->
 ## Custom HTTP Client
 
-The Typescript SDK makes API calls using the (axios)[https://axios-http.com/docs/intro] HTTP library.  In order to provide a convenient way to configure timeouts, cookies, proxies, custom headers, and other low-level configuration, you can initialize the SDK client with a custom `AxiosInstance` object.
+The Typescript SDK makes API calls using the [axios](https://axios-http.com/docs/intro) HTTP library.  In order to provide a convenient way to configure timeouts, cookies, proxies, custom headers, and other low-level configuration, you can initialize the SDK client with a custom `AxiosInstance` object.
 
 For example, you could specify a header for every request that your sdk makes as follows:
 
 ```typescript
-from The-Speakeasy-Bar import TheSpeakeasyBar;
-import axios;
+import { The-Speakeasy-Bar } from "TheSpeakeasyBar";
+import axios from "axios";
 
 const httpClient = axios.create({
     headers: {'x-custom-header': 'someValue'}
@@ -361,11 +392,11 @@ const httpClient = axios.create({
 
 const sdk = new TheSpeakeasyBar({defaultClient: httpClient});
 ```
-<!-- End Custom HTTP Client -->
+<!-- End Custom HTTP Client [http-client] -->
 
 
 
-<!-- Start Authentication -->
+<!-- Start Authentication [security] -->
 ## Authentication
 
 ### Per-Client Security Schemes
@@ -381,7 +412,7 @@ You can set the security parameters through the `security` optional parameter wh
 ```typescript
 import { TheSpeakeasyBar } from "The-Speakeasy-Bar";
 
-(async () => {
+async function run() {
     const sdk = new TheSpeakeasyBar({
         security: {
             apiKey: "<YOUR_API_KEY>",
@@ -395,7 +426,9 @@ import { TheSpeakeasyBar } from "The-Speakeasy-Bar";
     if (res.statusCode == 200) {
         // handle response
     }
-})();
+}
+
+run();
 
 ```
 
@@ -404,29 +437,35 @@ import { TheSpeakeasyBar } from "The-Speakeasy-Bar";
 Some operations in this SDK require the security scheme to be specified at the request level. For example:
 ```typescript
 import { TheSpeakeasyBar } from "The-Speakeasy-Bar";
+import { LoginSecurity, TypeT } from "The-Speakeasy-Bar/dist/sdk/models/operations";
 
-(async () => {
-    const sdk = new TheSpeakeasyBar({
-        security: {
-            apiKey: "<YOUR_API_KEY>",
+async function run() {
+    const sdk = new TheSpeakeasyBar();
+    const operationSecurity: LoginSecurity = {
+        password: "<PASSWORD>",
+        username: "<USERNAME>",
+    };
+
+    const res = await sdk.authentication.login(
+        {
+            type: TypeT.ApiKey,
         },
-    });
-
-    const res = await sdk.ingredients.listIngredients({
-        ingredients: ["string"],
-    });
+        operationSecurity
+    );
 
     if (res.statusCode == 200) {
         // handle response
     }
-})();
+}
+
+run();
 
 ```
-<!-- End Authentication -->
+<!-- End Authentication [security] -->
 
 
 
-<!-- Start Retries -->
+<!-- Start Retries [retries] -->
 ## Retries
 
 Some of the endpoints in this SDK support retries.  If you use the SDK without any configuration, it will fall back to the default retry strategy provided by the API.  However, the default retry strategy can be overridden on a per-operation basis, or across the entire SDK.
@@ -436,19 +475,30 @@ To change the default retry strategy for a single API call, simply provide a ret
 import { TheSpeakeasyBar } from "The-Speakeasy-Bar";
 import { Webhook } from "The-Speakeasy-Bar/dist/sdk/models/operations";
 
-(async () => {
+async function run() {
     const sdk = new TheSpeakeasyBar({
         security: {
             apiKey: "<YOUR_API_KEY>",
         },
     });
 
-    const res = await sdk.config.subscribeToWebhooks([{}]);
+    const res = await sdk.config.subscribeToWebhooks([{}], {
+        strategy: "backoff",
+        backoff: {
+            initialInterval: 1,
+            maxInterval: 50,
+            exponent: 1.1,
+            maxElapsedTime: 100,
+        },
+        retryConnectionErrors: false,
+    });
 
     if (res.statusCode == 200) {
         // handle response
     }
-})();
+}
+
+run();
 
 ```
 
@@ -457,7 +507,7 @@ If you'd like to override the default retry strategy for all operations that sup
 import { TheSpeakeasyBar } from "The-Speakeasy-Bar";
 import { Webhook } from "The-Speakeasy-Bar/dist/sdk/models/operations";
 
-(async () => {
+async function run() {
     const sdk = new TheSpeakeasyBar({
         retry_config: {
             strategy: "backoff",
@@ -479,10 +529,12 @@ import { Webhook } from "The-Speakeasy-Bar/dist/sdk/models/operations";
     if (res.statusCode == 200) {
         // handle response
     }
-})();
+}
+
+run();
 
 ```
-<!-- End Retries -->
+<!-- End Retries [retries] -->
 
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 
