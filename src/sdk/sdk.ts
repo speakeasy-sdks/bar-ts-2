@@ -88,9 +88,9 @@ export class SDKConfiguration {
     serverDefaults: any;
     language = "typescript";
     openapiDocVersion = "1.0.0";
-    sdkVersion = "0.3.5";
-    genVersion = "2.210.6";
-    userAgent = "speakeasy-sdk/typescript 0.3.5 2.210.6 1.0.0 The-Speakeasy-Bar";
+    sdkVersion = "0.4.0";
+    genVersion = "2.220.0";
+    userAgent = "speakeasy-sdk/typescript 0.4.0 2.220.0 1.0.0 The-Speakeasy-Bar";
     retryConfig?: utils.RetryConfig;
     public constructor(init?: Partial<SDKConfiguration>) {
         Object.assign(this, init);
