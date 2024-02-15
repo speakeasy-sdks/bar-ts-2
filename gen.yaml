@@ -5,6 +5,8 @@ generation:
     optionalPropertyRendering: withExample
   fixes:
     nameResolutionDec2023: false
+    parameterOrderingFeb2024: false
+    requestResponseComponentNamesFeb2024: false
 python:
   version: 1.26.0
   author: speakeasy-bar-2
@@ -13,7 +15,7 @@ python:
   maxMethodParams: 0
   packageName: The-Speakeasy-Bar
 typescript:
-  version: 0.4.0
+  version: 0.4.1
   author: speakeasy-bar-2
   clientServerStatusCodesAsErrors: true
   flattenGlobalSecurity: true

@@ -27,7 +27,7 @@ async function run() {
   });
 
   const res = await sdk.drinks.getDrink({
-    name: "string",
+    name: "<value>",
   });
 
   if (res.statusCode == 200) {

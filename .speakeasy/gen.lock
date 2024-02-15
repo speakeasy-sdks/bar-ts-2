@@ -4,9 +4,9 @@ management:
   docChecksum: f22d50ed7aa4956c14ae35514eb114c1
   docVersion: 1.0.0
   speakeasyVersion: internal
-  generationVersion: 2.225.2
-  releaseVersion: 0.4.0
-  configChecksum: f5b7c4573d729c06def85651e7470f11
+  generationVersion: 2.258.0
+  releaseVersion: 0.4.1
+  configChecksum: 2bbb5dfeeb994b4d253371cbfc535ea3
   repoURL: https://github.com/speakeasy-sdks/bar-ts-2.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-sdks/bar-ts-2
@@ -21,7 +21,7 @@ features:
     inputOutputModels: 2.81.1
     serverIDs: 2.81.1
   typescript:
-    core: 3.4.1
+    core: 3.4.7
     errors: 2.81.8
     examples: 2.81.3
     globalSecurity: 2.82.2
