@@ -17,7 +17,7 @@ python:
   maxMethodParams: 0
   packageName: The-Speakeasy-Bar
 typescript:
-  version: 0.5.0
+  version: 0.5.1
   author: speakeasy-bar-2
   clientServerStatusCodesAsErrors: true
   flattenGlobalSecurity: true

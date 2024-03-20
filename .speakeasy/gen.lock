@@ -3,10 +3,10 @@ id: 88aa5eb9-e99d-4886-888a-68422a50f955
 management:
   docChecksum: f22d50ed7aa4956c14ae35514eb114c1
   docVersion: 1.0.0
-  speakeasyVersion: 1.207.1
-  generationVersion: 2.280.6
-  releaseVersion: 0.5.0
-  configChecksum: a93ec61b9b21ce9a4c24ab645df8a39e
+  speakeasyVersion: 1.213.0
+  generationVersion: 2.283.1
+  releaseVersion: 0.5.1
+  configChecksum: 049c0f1f7ee57c3234548e7fdf1720d4
   repoURL: https://github.com/speakeasy-sdks/bar-ts-2.git
   repoSubDirectory: .
   installationURL: https://github.com/speakeasy-sdks/bar-ts-2
@@ -25,7 +25,7 @@ features:
     core: 3.4.8
     errors: 2.81.8
     examples: 2.81.3
-    globalSecurity: 2.82.4
+    globalSecurity: 2.82.5
     globalServerURLs: 2.82.2
     inputOutputModels: 2.83.0
     methodSecurity: 2.82.0
